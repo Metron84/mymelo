@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Background Colors */
+    --color-background: #FDF5E6; /* aged paper cream */
+    --color-foreground: #2F1B14; /* deep espresso */
+    --color-card: #F5E6D3; /* coffee-stained white */
+    --color-card-foreground: #2F1B14; /* deep espresso */
+    --color-popover: #F5E6D3; /* coffee-stained white */
+    --color-popover-foreground: #2F1B14; /* deep espresso */
+    
+    /* Muted Colors */
+    --color-muted: #D2B48C; /* warm tan */
+    --color-muted-foreground: #5D4037; /* medium roast brown */
+    
+    /* Border & Input */
+    --color-border: rgba(139, 69, 19, 0.2); /* coffee brown 20% */
+    --color-input: #F5E6D3; /* coffee-stained white */
+    --color-ring: #DAA520; /* golden brass */
+    
+    /* Brand Colors */
+    --color-primary: #8B4513; /* rich coffee brown */
+    --color-primary-foreground: #FFFFFF; /* white */
+    --color-secondary: #D2B48C; /* warm tan */
+    --color-secondary-foreground: #2F1B14; /* deep espresso */
+    --color-accent: #DAA520; /* golden brass */
+    --color-accent-foreground: #2F1B14; /* deep espresso */
+    
+    /* Status Colors */
+    --color-success: #228B22; /* fresh mint green */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #FF8C00; /* warm amber */
+    --color-warning-foreground: #2F1B14; /* deep espresso */
+    --color-error: #CD5C5C; /* muted terracotta */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #CD5C5C; /* muted terracotta */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Additional Brand Colors */
+    --color-coffee-dark: #2C1810; /* dark coffee */
+    --color-coffee-medium: #5D4037; /* medium roast brown */
+    --color-gold: #D4AF37; /* warm gold */
+    --color-cream: #FFF8DC; /* warm cornsilk */
+    --color-slate: #2F4F4F; /* deep slate gray */
+    --color-peru: #CD853F; /* warm peru */
+    
+    /* Radius */
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+    color: var(--color-foreground);
+  }
+  
+  button, .btn {
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: 500;
+  }
+  
+  .handwritten {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 400;
+  }
+}
+
+@layer utilities {
+  .coffee-stain {
+    position: relative;
+  }
+  
+  .coffee-stain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(101, 67, 33, 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 80% 70%, rgba(101, 67, 33, 0.08) 3px, transparent 3px),
+      radial-gradient(circle at 50% 50%, rgba(101, 67, 33, 0.06) 4px, transparent 4px);
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .sepia-filter {
+    filter: sepia(0.3) saturate(1.2);
+  }
+  
+  .warm-shadow {
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+  }
+  
+  .warm-shadow-lg {
+    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.15);
+  }
+  
+  .text-shadow-warm {
+    text-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
+  }
+}
