@@ -43,9 +43,9 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl p-8 border border-amber-200">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <div className="bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-amber-200">
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
               Admin Login
             </h1>
             <p className="text-gray-600">

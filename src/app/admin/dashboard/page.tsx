@@ -93,7 +93,7 @@ export default function AdminDashboardPage() {
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       <nav className="bg-white/90 backdrop-blur-sm shadow-md border-b border-amber-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center h-auto sm:h-16 py-3 sm:py-0 gap-3 sm:gap-4">
             <div className="flex items-center gap-4">
               <Link 
                 href="/homepage" 
@@ -101,17 +101,17 @@ export default function AdminDashboardPage() {
               >
                 <Icon name="HomeIcon" size={24} />
               </Link>
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
                 Admin Dashboard
               </h1>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
+              <span className="text-xs sm:text-sm text-gray-600 truncate max-w-[200px] sm:max-w-none">
                 {session?.user?.email}
               </span>
               <button
                 onClick={handleSignOut}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors w-full sm:w-auto text-sm sm:text-base"
               >
                 Sign Out
               </button>
@@ -120,9 +120,9 @@ export default function AdminDashboardPage() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-8 border border-amber-200 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 border border-amber-200 mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
             Welcome, Administrator
           </h2>
           <p className="text-gray-600 mb-6">
@@ -169,18 +169,18 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Content Management Cards */}
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-8 border border-amber-200">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 border border-amber-200">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
               Content Management
             </h2>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
               <Icon name="ShieldCheckIcon" size={20} />
               <span>Admin Only Access</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {contentManagementCards.map((card) => (
               <Link
                 key={card.title}

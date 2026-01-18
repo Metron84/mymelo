@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { writingsService, rankingsService, roundtableService, mediaService } from '@/services/contentService';
-import type { Writing, Ranking, ContentStatus, ContentCategory, MediaType, SessionFormat } from '@/types/database.types';
+import { writingsService, rankingsService, sessionsService, mediaService } from '../../services/contentService';
+import type { Writing, Ranking, ContentStatus, ContentCategory, MediaType, SessionFormat } from '../../types/database.types';
 
 type ContentType = 'writing' | 'ranking' | 'session' | 'media';
 
@@ -87,20 +87,23 @@ export default function ContentEditor() {
     
     try {
       setLoading(true);
+      let result;
       
       if (contentType === 'writing') {
-        const result = await writingsService.getById(editId);
-        setWritingForm(result as any);
+        result = await writingsService.getById(editId);
+        if (result?.data) setWritingForm(result.data as any);
       } else if (contentType === 'ranking') {
-        const result = await rankingsService.getById(editId);
-        setRankingForm(result as any);
+        result = await rankingsService.getById(editId);
+        if (result?.data) setRankingForm(result.data as any);
       } else if (contentType === 'session') {
-        const result = await roundtableService.getById(editId);
-        setSessionForm(result as any);
+        result = await sessionsService.getById(editId);
+        if (result?.data) setSessionForm(result.data as any);
       } else if (contentType === 'media') {
-        const result = await mediaService.getById(editId);
-        setMediaForm(result as any);
+        result = await mediaService.getById(editId);
+        if (result?.data) setMediaForm(result.data as any);
       }
+      
+      if (result?.error) throw new Error(result.error.message);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load content');
     } finally {
@@ -130,9 +133,9 @@ export default function ContentEditor() {
         }
       } else if (contentType === 'session') {
         if (editId) {
-          result = await roundtableService.update(editId, sessionForm);
+          result = await sessionsService.update(editId, sessionForm);
         } else {
-          result = await roundtableService.create(sessionForm as any);
+          result = await sessionsService.create(sessionForm as any);
         }
       } else if (contentType === 'media') {
         if (editId) {
@@ -522,19 +525,19 @@ export default function ContentEditor() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 py-6 sm:py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl p-8 border-4 border-amber-200">
+        <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border-4 border-amber-200">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-amber-900 mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-amber-900 mb-2">
               {editId ? 'Edit' : 'Create'} {contentType === 'writing' ? 'Writing' : contentType === 'ranking' ? 'Ranking' : contentType === 'session' ? 'Session' : 'Media'}
             </h1>
             <p className="text-amber-700">Fill out the form below to manage your content</p>
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex space-x-2 mb-8 overflow-x-auto">
+          <div className="flex space-x-2 mb-8 overflow-x-auto pb-2">
             <button
               onClick={() => router.push('/content-editor?type=writing')}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
